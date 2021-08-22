@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppSideMenu extends StatelessWidget {
   List<SideMenuItemData> sideMenuList =[
@@ -16,7 +17,7 @@ class AppSideMenu extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(vertical: 55),
             child: new Center(
-              child: new Text('News App!',
+              child: new Text(AppLocalizations.of(context)!.title,
                 style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 21),
               ),
             )

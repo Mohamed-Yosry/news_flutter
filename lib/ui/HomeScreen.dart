@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const String Route_Name = "Home Screen";
@@ -88,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: (){},
                         ),
                         contentPadding: EdgeInsets.only(top: 6),
-                        hintText: 'Search Article',
+                        hintText: AppLocalizations.of(context)!.search,
                         hintStyle: TextStyle(fontSize: 13, color: Color.fromRGBO(57, 165, 82, .35), fontWeight: FontWeight.bold),
                       )
                     ),

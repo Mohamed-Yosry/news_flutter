@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoriesPage extends StatelessWidget {
   static const String Route_Name ='Categories';
@@ -16,7 +17,7 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
         appBar: AppBar(
-        title: new Text('News App', style: TextStyle(color: Colors.white, fontSize: 22),),
+        title: new Text(AppLocalizations.of(context)!.title, style: TextStyle(color: Colors.white, fontSize: 22),),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -37,7 +38,7 @@ class CategoriesPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(29, 42, 0, 0),
             child: new Text(
-            'Pick your category \nof interest',
+              AppLocalizations.of(context)!.categories,
             style: TextStyle(color: Color(0xFF4F5A69), fontSize: 22, fontWeight: FontWeight.bold),
             ),
             ),

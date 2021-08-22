@@ -1,0 +1,13 @@
+{
+  "title": "News App",
+  "language": "Language",
+  "sports": "Sports",
+  "politics": "Politics",
+  "health": "Health",
+  "business": "Business",
+  "environment": "Environment",
+  "science": "Science",
+  "settings": "Settings",
+  "search": "Search Article",
+  "categories": "Pick your category \nof interest"
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SideMenuSettings extends StatefulWidget {
   static const String Route_name = 'Settings';
@@ -9,13 +10,13 @@ class SideMenuSettings extends StatefulWidget {
 }
 
 class _SideMenuSettingsState extends State<SideMenuSettings> {
-  static final List<String> dropDownListItem =['English', 'Arabic'];
+  static final List<String> dropDownListItem =['English', 'عربي'];
   String dropListValue = 'English';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text('Settings', style: TextStyle(color: Colors.white, fontSize: 22),),
+        title: new Text(AppLocalizations.of(context)!.settings, style: TextStyle(color: Colors.white, fontSize: 22),),
         centerTitle: true,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -36,7 +37,7 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
             Container(
               margin: EdgeInsets.fromLTRB(29, 42, 0, 0),
               child: new Text(
-                'Language',
+                AppLocalizations.of(context)!.language,
                 style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),

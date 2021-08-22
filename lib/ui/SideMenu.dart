@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppSideMenu extends StatelessWidget {
   List<SideMenuItemData> sideMenuList =[
-    SideMenuItemData(Icons.view_list_rounded, "Categoriese"),
+    SideMenuItemData(Icons.view_list_rounded, "Categories"),
     SideMenuItemData(Icons.settings, "Settings"),
 
   ];
@@ -49,12 +49,17 @@ class SideMenuItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Padding(padding: EdgeInsets.all(16), child: Icon(myData.iconData, size: 26,),),
-        Text(myData.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),),
-      ],
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, myData.title);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsets.all(16), child: Icon(myData.iconData, size: 26,),),
+          Text(myData.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),),
+        ],
+      ),
     );
   }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String Route_Name = "Home Screen";
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

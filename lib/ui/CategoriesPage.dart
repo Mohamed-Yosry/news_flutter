@@ -39,7 +39,7 @@ class CategoriesPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           Container(
-            margin: EdgeInsets.fromLTRB(29, 42, 0, 0),
+            margin: EdgeInsets.fromLTRB(29, 42, 29, 0),
             child: new Text(
               AppLocalizations.of(context)!.categoriesText,
             style: TextStyle(color: Color(0xFF4F5A69), fontSize: 22, fontWeight: FontWeight.bold),

@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:news_flutter/AppConfigProvider.dart';
+
 
 class SideMenuSettings extends StatefulWidget {
   static const String Route_name = 'Settings';
@@ -10,10 +13,19 @@ class SideMenuSettings extends StatefulWidget {
 }
 
 class _SideMenuSettingsState extends State<SideMenuSettings> {
+
+
+  /*change(){
+    setState(() {
+
+    });
+  }*/
+
   static final List<String> dropDownListItem =['English', 'عربي'];
   String dropListValue = 'English';
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppConfigProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: new Text(AppLocalizations.of(context)!.settings, style: TextStyle(color: Colors.white, fontSize: 22),),
@@ -35,7 +47,7 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Container(
-              margin: EdgeInsets.fromLTRB(29, 42, 0, 0),
+              margin: EdgeInsets.fromLTRB(29, 42, 29, 0),
               child: new Text(
                 AppLocalizations.of(context)!.language,
                 style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
@@ -56,13 +68,16 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
                     value: dropListValue,
                     items: dropDownListItem.map(buildMenuItem).toList(),
                     onChanged: (value){
-                      ///if(value == 'English')
-                      ///provider changLanguage('en');
-                      ///else id(value == 'Arabic')
-                      ///provider changeLanguage('ar');
                       setState(() {
+                        print("$value");
+                      if(value == 'English')
+                        provider.changeLanguage('en');
+                      else if(value == 'عربي')
+                        provider.changeLanguage('ar');
+
                         dropListValue = value!;
                       });
+
                     },
                   ),
                 ),
@@ -82,6 +97,6 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
       item,
       style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14),
     ),
-    //onTap: ,
+    //onTap: change ,
   );
 }

@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.cover,),
+            image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.fill,),
           ),
           child: Container(),///to add body from API
         )

@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color.fromRGBO(57, 165, 82, 1),
       ),
       home: HomeScreen(),
+
     );
   }
 }

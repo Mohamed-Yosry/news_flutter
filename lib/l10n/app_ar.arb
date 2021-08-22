@@ -1,13 +1,14 @@
 {
   "title": "اخبار",
   "language": "لغة",
-  "Sports": "رياضة",
-  "Politics": "سياسة",
-  "Health": "صحة",
-  "Business": "أعمل",
-  "Environment": "بيئة",
-  "Science": "علوم",
+  "sports": "رياضة",
+  "politics": "سياسة",
+  "health": "صحة",
+  "business": "أعمل",
+  "environment": "بيئة",
+  "science": "علوم",
   "settings": "اعدادات",
   "search": "ابحث عن مقالة",
-  "categories": "اختر نوع الخبر \n الذي يهمك"
+  "categoriesText": "اختر نوع الخبر \n الذي يهمك",
+  "categories": "انواع الأخبار"
 }

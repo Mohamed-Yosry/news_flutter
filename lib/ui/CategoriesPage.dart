@@ -4,17 +4,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoriesPage extends StatelessWidget {
   static const String Route_Name ='Categories';
-  static final List<CategoryParameters> inGridCategories =[
-    new CategoryParameters(Color(0xFFC91C22), 'assets/sports.png', "Sports", true),
-    new CategoryParameters(Color(0xFF003E90), 'assets/Politics.png', "Politics", false),
-    new CategoryParameters(Color(0xFFED1E79), 'assets/health.png', "Health", true),
-    new CategoryParameters(Color(0xFFCF7E48), 'assets/bussines.png', "Business", false),
-    new CategoryParameters(Color(0xFF4882CF), 'assets/environment.png', "Environment", true),
-    new CategoryParameters(Color(0xFFF2D352), 'assets/science.png', "Science", false),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+
+     final List<CategoryParameters> inGridCategories =[
+      new CategoryParameters(Color(0xFFC91C22), 'assets/sports.png', AppLocalizations.of(context)!.sports, true),
+      new CategoryParameters(Color(0xFF003E90), 'assets/Politics.png', AppLocalizations.of(context)!.politics, false),
+      new CategoryParameters(Color(0xFFED1E79), 'assets/health.png', AppLocalizations.of(context)!.health, true),
+      new CategoryParameters(Color(0xFFCF7E48), 'assets/bussines.png', AppLocalizations.of(context)!.business, false),
+      new CategoryParameters(Color(0xFF4882CF), 'assets/environment.png', AppLocalizations.of(context)!.environment, true),
+      new CategoryParameters(Color(0xFFF2D352), 'assets/science.png', AppLocalizations.of(context)!.science, false),
+    ];
+
     return  Scaffold(
         appBar: AppBar(
         title: new Text(AppLocalizations.of(context)!.title, style: TextStyle(color: Colors.white, fontSize: 22),),
@@ -38,7 +41,7 @@ class CategoriesPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(29, 42, 0, 0),
             child: new Text(
-              AppLocalizations.of(context)!.categories,
+              AppLocalizations.of(context)!.categoriesText,
             style: TextStyle(color: Color(0xFF4F5A69), fontSize: 22, fontWeight: FontWeight.bold),
             ),
             ),

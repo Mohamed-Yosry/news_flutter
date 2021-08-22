@@ -82,5 +82,6 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
       item,
       style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14),
     ),
+    //onTap: ,
   );
 }

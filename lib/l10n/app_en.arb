@@ -9,5 +9,6 @@
   "science": "Science",
   "settings": "Settings",
   "search": "Search Article",
-  "categories": "Pick your category \nof interest"
+  "categoriesText": "Pick your category \nof interest",
+  "categories": "Categories"
 }

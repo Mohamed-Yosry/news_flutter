@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppSideMenu extends StatelessWidget {
-  List<SideMenuItemData> sideMenuList =[
-    SideMenuItemData(Icons.view_list_rounded, "Categories"),
-    SideMenuItemData(Icons.settings, "Settings"),
 
-  ];
   @override
   Widget build(BuildContext context) {
+    List<SideMenuItemData> sideMenuList =[
+      SideMenuItemData(Icons.view_list_rounded, AppLocalizations.of(context)!.categories,"Categories"),
+      SideMenuItemData(Icons.settings, AppLocalizations.of(context)!.settings,"Settings"),
+
+    ];
     return Container(
       child: new Column(
         children: [
@@ -25,7 +26,7 @@ class AppSideMenu extends StatelessWidget {
           Expanded(
               child: ListView.builder(itemBuilder: (context, index)
                   {
-                    return SideMenuItem(sideMenuList[index]);
+                    return SideMenuItem(sideMenuList[index],index);
                   },
                   itemCount: sideMenuList.length,
               )
@@ -41,18 +42,21 @@ class SideMenuItemData
 {
   IconData iconData;
   String title;
-  SideMenuItemData(this.iconData, this.title);
+  String navigatorTitle;
+  SideMenuItemData(this.iconData, this.title,this.navigatorTitle);
 }
 
 class SideMenuItem extends StatelessWidget{
   SideMenuItemData myData;
-  SideMenuItem(this.myData);
+  int index;
+  SideMenuItem(this.myData,this.index);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, myData.title);
+        Navigator.pushNamed(context, myData.navigatorTitle);
+
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

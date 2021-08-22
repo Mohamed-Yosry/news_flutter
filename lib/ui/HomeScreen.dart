@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:news_flutter/AppConfigProvider.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -12,9 +15,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isTextFieldActive = false;
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppConfigProvider>(context);
     var searchController = TextEditingController() ;
     return GestureDetector(
       onTap: () =>FocusScope.of(context).requestFocus(new FocusNode()),
@@ -32,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: Align(
-                    alignment: Alignment.centerRight,
+                    alignment: provider.curruntLocale == 'ar'? Alignment.centerLeft : Alignment.centerRight,
                     child: IconButton(
-                      padding: EdgeInsets.only(top: 25, right: 25),
+                      padding: EdgeInsets.only(top: 25, right: 25, left: 25),
                       color: Colors.white,
                       iconSize: 34,
                       icon: Icon(Icons.search),

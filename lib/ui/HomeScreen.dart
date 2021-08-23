@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:news_flutter/api/ApiManager.dart';
+import 'package:news_flutter/model/SourceResponse.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:news_flutter/AppConfigProvider.dart';
+import 'package:http/http.dart' as http;
+import 'HomeTabsScreen.dart';
 
 
 
@@ -15,6 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isTextFieldActive = false;
+  late Future<SourceResponse> newFuture;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    newFuture = getNewsSources();
+  }
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
@@ -110,9 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.fill,),
           ),
-          child: Container(),///to add body from API
+          child: FutureBuilder<SourceResponse>(
+            future: newFuture,
+            builder: (BuildContext context, snapshot) {
+              if(snapshot.hasData)
+              {
+                return HomeTabs(snapshot.data!.sources);
+              }else if(snapshot.hasError){
+                //print(snapshot.error);
+                return Text("error");
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),///to add body from API
         )
       ),
     );
   }
+
 }

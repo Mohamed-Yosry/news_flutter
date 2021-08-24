@@ -23,11 +23,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: Color.fromRGBO(57, 165, 82, 1),
           ),
-          routes: {
-            HomeScreen.Route_Name : (context) => HomeScreen(),
-            SideMenuSettings.Route_name : (context) => SideMenuSettings(),
-            CategoriesPage.Route_Name : (context) => CategoriesPage(),
-          },
+
           localizationsDelegates: [
             AppLocalizations.delegate, // Add this line
             GlobalMaterialLocalizations.delegate,
@@ -35,6 +31,11 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: Locale.fromSubtags(languageCode: provider.curruntLocale),
+          routes: {
+            HomeScreen.Route_Name : (context) => HomeScreen(provider.curruntLocale),
+            SideMenuSettings.Route_name : (context) => SideMenuSettings(),
+            CategoriesPage.Route_Name : (context) => CategoriesPage(),
+          },
           supportedLocales: AppLocalizations.supportedLocales,
           initialRoute: HomeScreen.Route_Name,
 

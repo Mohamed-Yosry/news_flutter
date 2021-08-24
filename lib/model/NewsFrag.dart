@@ -8,23 +8,24 @@ import 'SourceResponse.dart';
 
 class NewsFrag extends StatefulWidget {
   String curruntCategories;
-
+  String curruntLocale;
   final Source source;
-  NewsFrag(this.source, this.curruntCategories);
+  NewsFrag(this.source, this.curruntCategories,this.curruntLocale);
 
   @override
-  _NewsFragState createState() => _NewsFragState(curruntCategories);
+  _NewsFragState createState() => _NewsFragState(curruntCategories,curruntLocale);
 }
 
 class _NewsFragState extends State<NewsFrag> {
   String curruntCategories;
-  _NewsFragState(this.curruntCategories);
+  String curruntLocale;
+  _NewsFragState(this.curruntCategories,this.curruntLocale);
   late Future<NewsResponse> newFuture;
   @override
   initState() {
     // TODO: implement initState
     super.initState();
-    newFuture = loadNews(widget.source,curruntCategories);
+    newFuture = loadNews(widget.source,curruntCategories,curruntLocale);
   }
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class _NewsFragState extends State<NewsFrag> {
 
   Future refresh() async {
     await Future.delayed(Duration(seconds: 1));
-    newFuture=loadNews(widget.source,curruntCategories);
+    newFuture=loadNews(widget.source,curruntCategories,curruntLocale);
     setState(() {});
   }
 }

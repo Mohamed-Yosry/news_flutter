@@ -14,12 +14,16 @@ import 'HomeTabsScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String Route_Name = "Home Screen";
+  String curruntLocale;
+  HomeScreen(this.curruntLocale);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState(curruntLocale);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String curruntLocale;
+  _HomeScreenState(this.curruntLocale);
   bool _isTextFieldActive = false, onSearch = false;
   late Future<SourceResponse> newFuture;
   String windowTitle = "", category='general';
@@ -28,12 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    newFuture = getNewsSources(category);
+    newFuture = getNewsSources(category,curruntLocale);
   }
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
     final  arg = ModalRoute.of(context)!.settings.arguments;
+
 
     if(arg==null && !onSearch) {
       windowTitle = category = "general";
@@ -155,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
               {
                 //print(arg);
 
-                  return HomeTabs(snapshot.data!.sources,category);
+                  return HomeTabs(snapshot.data!.sources,category,provider.curruntLocale);
               }else if(snapshot.hasError){
                 print(snapshot.error);
                 return Text("error");

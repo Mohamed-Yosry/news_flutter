@@ -8,19 +8,21 @@ import 'package:news_flutter/ui/TabItem.dart';
 class HomeTabs extends StatefulWidget {
   String curruntCategories;
   List<Source> sources;
-  HomeTabs(this.sources,this.curruntCategories);
+  String curruntLocale;
+  HomeTabs(this.sources,this.curruntCategories,this.curruntLocale);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _HomeTabsState(this.sources,curruntCategories);
+    return _HomeTabsState(this.sources,curruntCategories,curruntLocale);
   }
 }
 
 class _HomeTabsState extends State<HomeTabs> {
   List<Source> sources;
   String curruntCategories;
-  _HomeTabsState(this.sources,this.curruntCategories);
+  String curruntLocale;
+  _HomeTabsState(this.sources,this.curruntCategories,this.curruntLocale);
 
   int selectedTab = 0;
 
@@ -46,7 +48,7 @@ class _HomeTabsState extends State<HomeTabs> {
               Expanded(
                 child:TabBarView(
                   children:
-                    widget.sources.map((e) => NewsFrag(e,curruntCategories)).toList(),
+                    widget.sources.map((e) => NewsFrag(e,curruntCategories,curruntLocale)).toList(),
                     //widget.sources.map((e) => NewsFrag(e)).toList()
                 ),
               )

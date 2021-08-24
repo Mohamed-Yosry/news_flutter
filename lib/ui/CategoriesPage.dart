@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:news_flutter/ui/arguments.dart';
+
+import 'HomeScreen.dart';
 
 class CategoriesPage extends StatelessWidget {
   static const String Route_Name ='Categories';
@@ -91,7 +94,7 @@ class CategoryItem extends StatelessWidget
       ),
       child: FlatButton(
           onPressed: (){
-            ///to get the category = myParams.categoryTitle
+            //Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: ScreenArguments( myParams.categoryTitle));
           },
           child: Center(
             child: Column(

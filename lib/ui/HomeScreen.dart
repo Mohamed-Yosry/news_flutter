@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:news_flutter/AppConfigProvider.dart';
 import 'package:http/http.dart' as http;
 import 'HomeTabsScreen.dart';
+import 'package:news_flutter/ui/arguments.dart';
 
 
 
@@ -31,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
+    //final arg = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+
     var searchController = TextEditingController() ;
     return GestureDetector(
       onTap: () =>FocusScope.of(context).requestFocus(new FocusNode()),
@@ -128,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context, snapshot) {
               if(snapshot.hasData)
               {
-                return HomeTabs(snapshot.data!.sources);
+                return HomeTabs(snapshot.data!.sources,"general");
               }else if(snapshot.hasError){
                 print(snapshot.error);
                 return Text("error");

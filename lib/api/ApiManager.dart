@@ -6,10 +6,10 @@ import 'package:news_flutter/model/SourceResponse.dart';
 import 'package:provider/provider.dart';
 
 
-Future<SourceResponse> getNewsSources() async{
+Future<SourceResponse> getNewsSources(String category) async{
   //https://newsapi.org/v2/top-headlines/sources?apiKey=47a5a3cdc1d842f2af19ab7f6b4fdaf3
   final uri = Uri.https('newsapi.org', '/v2/top-headlines/sources',
-      {'apiKey': '47a5a3cdc1d842f2af19ab7f6b4fdaf3'});
+      {'apiKey': '47a5a3cdc1d842f2af19ab7f6b4fdaf3','category': category});
   final response = await http.get(uri);
   if(response.statusCode == 200)
   {

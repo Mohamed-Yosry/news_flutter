@@ -22,16 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool _isTextFieldActive = false;
   late Future<SourceResponse> newFuture;
-
+  late String category = 'general';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    newFuture = getNewsSources();
+    newFuture = getNewsSources(category);
   }
   @override
   Widget build(BuildContext context) {
-    String category;
     final provider = Provider.of<AppConfigProvider>(context);
     final arg = ModalRoute.of(context)!.settings.arguments;
     if(arg==null)

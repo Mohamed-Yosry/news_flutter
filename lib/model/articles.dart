@@ -1,6 +1,3 @@
-
-
-
 import 'Source.dart';
 import 'SourceResponse.dart';
 
@@ -14,7 +11,6 @@ class NewsItem {
 	late String urlToImage;
 	late String publishedAt;
 	late String content;
-	NewsItem({required this.description,required this.url,required this.content,required this.urlToImage});
 
 	NewsItem.fromJsonMap(Map<String, dynamic> map):
 				source = Source.fromJson(map["source"]),

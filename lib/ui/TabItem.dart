@@ -12,20 +12,20 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return isSelected?
     Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Theme.of(context).primaryColor,
-      ),
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: Theme.of(context).primaryColor,
+        ),
 
-      child: Text(source.name,style: TextStyle(color: Colors.white))):
+        child: Text(source.name,style: TextStyle(color: Colors.white))):
     Container(
       padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Theme.of(context).primaryColor)
-        ),
-        child: Text(source.name,style: TextStyle(color: Colors.black),),);
+      ),
+      child: Text(source.name,style: TextStyle(color: Colors.black),),);
   }
 
 

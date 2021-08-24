@@ -2,9 +2,9 @@ import 'package:news_flutter/model/articles.dart';
 
 class NewsResponse {
 
-  String status;
-  int totalResults;
-  List<NewsItem> articles;
+	String status;
+	int totalResults;
+	List<NewsItem> articles;
 
 	NewsResponse.fromJsonMap(Map<String, dynamic> map):
 				status = map["status"],

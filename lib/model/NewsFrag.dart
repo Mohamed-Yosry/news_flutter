@@ -53,7 +53,6 @@ class _NewsFragState extends State<NewsFrag> {
 
   Future refresh() async {
     await Future.delayed(Duration(seconds: 1));
-
     newFuture=loadNews(widget.source,curruntCategories);
     setState(() {});
   }

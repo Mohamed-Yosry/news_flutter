@@ -138,7 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
               if(snapshot.hasData)
               {
                 //print(arg);
-
                   return HomeTabs(snapshot.data!.sources,category);
               }else if(snapshot.hasError){
                 print(snapshot.error);

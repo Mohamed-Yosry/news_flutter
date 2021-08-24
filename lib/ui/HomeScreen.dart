@@ -20,9 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isTextFieldActive = false;
+  bool _isTextFieldActive = false, onSearch = false;
   late Future<SourceResponse> newFuture;
-  late String category = 'general';
+  String windowTitle = "", category='general';
+  var searchController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -32,19 +33,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
-    final arg = ModalRoute.of(context)!.settings.arguments;
-    if(arg==null)
-      category="general";
-    else
-      category=arg.toString();
+    final  arg = ModalRoute.of(context)!.settings.arguments;
 
+    if(arg==null && !onSearch) {
+      windowTitle = category = "general";
+    }
+    else if(!onSearch) {
+      final arg=ModalRoute.of(context)!.settings.arguments as List;
 
-    var searchController = TextEditingController() ;
+      category = arg[0].toString();
+      windowTitle = arg[1].toString();
+    }
+
     return GestureDetector(
       onTap: () =>FocusScope.of(context).requestFocus(new FocusNode()),
       child: Scaffold(
         appBar: !_isTextFieldActive ? AppBar(
-          title: new Text(category,/**to add Category name**/),
+          title: new Text(windowTitle,/**to add Category name**/),
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -96,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: TextField(
                       style: TextStyle(color: Theme.of(context).primaryColor),
-                      controller: searchController = TextEditingController() ,
+                      controller: searchController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: IconButton(
@@ -111,7 +116,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         suffixIcon: IconButton(
                             color: Theme.of(context).primaryColor,
                             icon: Icon(Icons.search),
-                            onPressed: (){},
+                            onPressed: (){
+                              setState(() {
+                                windowTitle="Search";
+                              });
+                              Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: [searchController.text, "Search"]);
+                              // setState(() {
+                              //   category= searchController.text;
+                              //   windowTitle= "Search";
+                              //   searchController.clear();
+                              //   onSearch=true;
+                              //   _isTextFieldActive=false;
+                              // });
+                            },
                         ),
                         contentPadding: EdgeInsets.only(top: 6),
                         hintText: AppLocalizations.of(context)!.search,
@@ -137,6 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if(snapshot.hasData)
               {
                 //print(arg);
+
                   return HomeTabs(snapshot.data!.sources,category);
               }else if(snapshot.hasError){
                 print(snapshot.error);

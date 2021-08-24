@@ -26,6 +26,7 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppConfigProvider>(context);
+    dropListValue = provider.curruntLocale=='ar' ? dropDownListItem[1] : dropDownListItem[0];
     return Scaffold(
       appBar: AppBar(
         title: new Text(AppLocalizations.of(context)!.settings, style: TextStyle(color: Colors.white, fontSize: 22),),

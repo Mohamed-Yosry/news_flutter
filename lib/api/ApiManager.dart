@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_flutter/model/NewsResponse.dart';
 import 'package:news_flutter/model/Source.dart';
@@ -24,9 +25,9 @@ Future<SourceResponse> getNewsSources(String category) async{
 Future<NewsResponse> loadNews(Source source,String category) async {
   //https://newsapi.org/v2/top-headlines/sources?apiKey=47a5a3cdc1d842f2af19ab7f6b4fdaf3
   final uri = Uri.https("newsapi.org", "/v2/everything",
-      {'apiKey':'47a5a3cdc1d842f2af19ab7f6b4fdaf3',
+      {'apiKey':'47a5a3cdc1d842f2af19ab7f6b4fdaf3',  //681a926a28cf456a8f74056b40e2551a
         'sources':source.id,
-        'q': category
+        'q': category,
         //'language':provider.curruntLocale
       });
 

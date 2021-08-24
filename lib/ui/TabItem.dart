@@ -4,7 +4,7 @@ import 'package:news_flutter/model/Source.dart';
 import 'package:news_flutter/model/SourceResponse.dart';
 
 class TabItem extends StatelessWidget {
-  Sources source;
+  Source source;
   bool isSelected;
   TabItem(this.source, this.isSelected);
   @override

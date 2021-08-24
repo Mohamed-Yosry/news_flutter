@@ -8,7 +8,7 @@ import 'SourceResponse.dart';
 
 class NewsFrag extends StatefulWidget {
 
-  final Sources source;
+  final Source source;
   NewsFrag(this.source);
 
   @override
@@ -38,7 +38,7 @@ class _NewsFragState extends State<NewsFrag> {
               },itemCount: snapShot.data!.articles.length,
               );
             }else if(snapShot.hasError){
-              //print(snapShot.error);
+              print(snapShot.error);
               return Text('$snapShot');
             }
             return Center(child: CircularProgressIndicator());

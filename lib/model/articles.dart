@@ -1,4 +1,8 @@
+
+
+
 import 'Source.dart';
+import 'SourceResponse.dart';
 
 class NewsItem {
 

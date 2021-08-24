@@ -6,7 +6,7 @@ import 'package:news_flutter/model/SourceResponse.dart';
 import 'package:news_flutter/ui/TabItem.dart';
 
 class HomeTabs extends StatefulWidget {
-  List<Sources> sources;
+  List<Source> sources;
   HomeTabs(this.sources);
 
   @override
@@ -17,7 +17,7 @@ class HomeTabs extends StatefulWidget {
 }
 
 class _HomeTabsState extends State<HomeTabs> {
-  List<Sources> sources;
+  List<Source> sources;
 
   _HomeTabsState(this.sources);
 

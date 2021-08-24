@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_flutter/model/Source.dart';
-import 'package:news_flutter/model/SourceResponse.dart';
 
 class TabItem extends StatelessWidget {
   Source source;

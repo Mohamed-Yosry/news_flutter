@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:news_flutter/ui/arguments.dart';
 
 import 'HomeScreen.dart';
 
@@ -92,9 +91,10 @@ class CategoryItem extends StatelessWidget
             :BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25), bottomRight: Radius.circular(25)),
         color: myParams.backgroundColor,
       ),
+      // ignore: deprecated_member_use
       child: FlatButton(
           onPressed: (){
-            //Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: ScreenArguments( myParams.categoryTitle));
+            Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: myParams.categoryTitle);
           },
           child: Center(
             child: Column(

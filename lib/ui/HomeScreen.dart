@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:news_flutter/AppConfigProvider.dart';
 import 'package:http/http.dart' as http;
 import 'HomeTabsScreen.dart';
-import 'package:news_flutter/ui/arguments.dart';
 
 
 
@@ -23,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool _isTextFieldActive = false;
   late Future<SourceResponse> newFuture;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -31,15 +31,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    String category;
     final provider = Provider.of<AppConfigProvider>(context);
-    //final arg = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final arg = ModalRoute.of(context)!.settings.arguments;
+    if(arg==null)
+      category="general";
+    else
+      category=arg.toString();
+
 
     var searchController = TextEditingController() ;
     return GestureDetector(
       onTap: () =>FocusScope.of(context).requestFocus(new FocusNode()),
       child: Scaffold(
         appBar: !_isTextFieldActive ? AppBar(
-          title: new Text('',/**to add Category name**/),
+          title: new Text(category,/**to add Category name**/),
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -131,7 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context, snapshot) {
               if(snapshot.hasData)
               {
-                return HomeTabs(snapshot.data!.sources,"general");
+                //print(arg);
+
+                  return HomeTabs(snapshot.data!.sources,category);
               }else if(snapshot.hasError){
                 print(snapshot.error);
                 return Text("error");

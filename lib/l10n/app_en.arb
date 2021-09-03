@@ -9,6 +9,8 @@
   "science": "Science",
   "settings": "Settings",
   "search": "Search Article",
+  "searchAppBar": "Search",
   "categoriesText": "Pick your category \nof interest",
-  "categories": "Categories"
+  "categories": "Categories",
+  "general": "General"
 }

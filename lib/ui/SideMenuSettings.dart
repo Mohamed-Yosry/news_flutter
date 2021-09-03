@@ -28,7 +28,7 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
     final provider = Provider.of<AppConfigProvider>(context);
     dropListValue = provider.curruntLocale=='ar' ? dropDownListItem[1] : dropDownListItem[0];
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: new Text(AppLocalizations.of(context)!.settings, style: TextStyle(color: Colors.white, fontSize: 22),),
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -36,10 +36,10 @@ class _SideMenuSettingsState extends State<SideMenuSettings> {
               bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28),
             )
         ),
-      ),
-      drawer: Drawer(
+      ),*/
+      /*drawer: Drawer(
         child: AppSideMenu(),
-      ),
+      ),*/
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.fill,),

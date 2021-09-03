@@ -1,17 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:news_flutter/api/ApiManager.dart';
 import 'package:news_flutter/model/SourceResponse.dart';
+import 'package:news_flutter/ui/CategoryChosenItem.dart';
 import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:news_flutter/AppConfigProvider.dart';
-import 'package:http/http.dart' as http;
-import 'HomeTabsScreen.dart';
+import 'package:news_flutter/ui/appBar/%D9%90AppBarWithSearch.dart';
+import 'CategoriesPage.dart';
+import 'SideMenuSettings.dart';
+import 'appBar/AppBarWithoutSearch.dart';
 
-
-
+// ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
   static const String Route_Name = "Home Screen";
   String curruntLocale;
@@ -22,155 +20,73 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int curruntIndex = 2, appBarIndex = 0;
   String curruntLocale;
   _HomeScreenState(this.curruntLocale);
   bool _isTextFieldActive = false, onSearch = false;
   late Future<SourceResponse> newFuture;
-  String windowTitle = "", category='general';
+  String windowTitle = "general";
   var searchController = TextEditingController();
+  String category = 'general',search="";
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    newFuture = getNewsSources(category,curruntLocale);
+    print("initstate   $category");
+    newFuture = getNewsSources(category, curruntLocale);
   }
+
+  changeCategoriItem(String categoryTitle,String categoryEnglishTitle) {
+    setState(() {
+      windowTitle=categoryTitle;
+      category=categoryEnglishTitle;
+      search=categoryEnglishTitle;
+      curruntIndex=2;
+      appBarIndex=0;
+      print("$windowTitle   /////////////////////////////  $category   ////\n$curruntIndex////////// $appBarIndex");
+    });
+  }
+
+  changeCurruntBody(int newIndex) {
+    setState(() {
+      curruntIndex = newIndex;
+      appBarIndex=1;
+      Navigator.pop(context);
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AppConfigProvider>(context);
-    final  arg = ModalRoute.of(context)!.settings.arguments;
 
+    if(category=='general')
+      windowTitle = AppLocalizations.of(context)!.general;
 
-    if(arg==null && !onSearch) {
-      windowTitle = category = "general";
-    }
-    else if(!onSearch) {
-      final arg=ModalRoute.of(context)!.settings.arguments as List;
+    List bodyList = [
+      SideMenuSettings(),
+      CategoriesPage(changeCategoriItem),
+      CategoryChosenItem(newFuture, category,search),
+    ];
 
-      category = arg[0].toString();
-      windowTitle = arg[1].toString();
-    }
+    List appBarsList = [
+      AppBarWithSearch(_isTextFieldActive, onSearch, windowTitle,changeCategoriItem),
+      AppBarWithoutSearch(),
+    ];
+
+    print("under list   $windowTitle   /////////////////////////////  $category   ////\n$curruntIndex////////// $appBarIndex");
 
     return GestureDetector(
-      onTap: () =>FocusScope.of(context).requestFocus(new FocusNode()),
+      onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
       child: Scaffold(
-        appBar: !_isTextFieldActive ? AppBar(
-          title: new Text(windowTitle,/**to add Category name**/),
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28),
-            )
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60),
+            child: appBarsList[appBarIndex],
           ),
-          flexibleSpace: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Align(
-                    alignment: provider.curruntLocale == 'ar'? Alignment.centerLeft : Alignment.centerRight,
-                    child: IconButton(
-                      padding: EdgeInsets.only(top: 25, right: 25, left: 25),
-                      color: Colors.white,
-                      iconSize: 34,
-                      icon: Icon(Icons.search),
-                      onPressed: (){
-                        setState(() {
-                          _isTextFieldActive=true;
-                        });
-                      },
-                    ),
-                ),
-              ),
-            ],
+          drawer: Drawer(
+            child: AppSideMenu(changeCurruntBody),
           ),
-        )
-        : AppBar(
-          automaticallyImplyLeading: false,
-          actionsIconTheme: IconThemeData(
-            color: Theme.of(context).primaryColor,
-          ),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28),
-              )
-          ),
-          actions: [
-            Expanded(
-              child: FractionallySizedBox(
-                alignment: Alignment.center,
-                widthFactor: 0.83,
-                heightFactor: 0.72,
-                child: new Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(35),
-                    color: Colors.white,
-                  ),
-                  child: TextField(
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: IconButton(
-                          color: Theme.of(context).primaryColor,
-                          icon: Icon(Icons.close),
-                          onPressed: (){
-                            setState(() {
-                              _isTextFieldActive=false;
-                            });
-                          },
-                        ),
-                        suffixIcon: IconButton(
-                            color: Theme.of(context).primaryColor,
-                            icon: Icon(Icons.search),
-                            onPressed: (){
-                              setState(() {
-                                windowTitle="Search";
-                              });
-                              Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: [searchController.text, "Search"]);
-                              // setState(() {
-                              //   category= searchController.text;
-                              //   windowTitle= "Search";
-                              //   searchController.clear();
-                              //   onSearch=true;
-                              //   _isTextFieldActive=false;
-                              // });
-                            },
-                        ),
-                        contentPadding: EdgeInsets.only(top: 6),
-                        hintText: AppLocalizations.of(context)!.search,
-                        hintStyle: TextStyle(fontSize: 13, color: Color.fromRGBO(57, 165, 82, .35), fontWeight: FontWeight.bold),
-                      )
-                    ),
-                  ),
-                ),
-              ),
-            ]
-        ),
-
-        drawer: Drawer(
-          child: AppSideMenu(),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.fill,),
-          ),
-          child: FutureBuilder<SourceResponse>(
-            future: newFuture,
-            builder: (BuildContext context, snapshot) {
-              if(snapshot.hasData)
-              {
-                //print(arg);
-
-                  return HomeTabs(snapshot.data!.sources,category,provider.curruntLocale);
-              }else if(snapshot.hasError){
-                print(snapshot.error);
-                return Text("error");
-              }
-              return Center(child: CircularProgressIndicator());
-            },
-          ),///to add body from API
-        )
-      ),
+          body: bodyList[curruntIndex]),
     );
   }
-
 }

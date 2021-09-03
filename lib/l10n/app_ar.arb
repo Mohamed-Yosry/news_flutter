@@ -9,6 +9,8 @@
   "science": "علوم",
   "settings": "اعدادات",
   "search": "ابحث عن مقالة",
+  "searchAppBar": "بحث",
   "categoriesText": "اختر نوع الخبر \n الذي يهمك",
-  "categories": "انواع الأخبار"
+  "categories": "انواع الأخبار",
+  "general": "عام"
 }

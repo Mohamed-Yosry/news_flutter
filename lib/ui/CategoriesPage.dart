@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_flutter/ui/SideMenu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'HomeScreen.dart';
 
 class CategoriesPage extends StatelessWidget {
+  final Function(String,String) changeCurruntCategoty;
+  CategoriesPage(this.changeCurruntCategoty);
+
+
   static const String Route_Name ='Categories';
 
 
@@ -12,27 +14,15 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final List<CategoryParameters> inGridCategories =[
-      new CategoryParameters(Color(0xFFC91C22), 'assets/sports.png', AppLocalizations.of(context)!.sports, true,"sports"),
-      new CategoryParameters(Color(0xFF003E90), 'assets/Politics.png', AppLocalizations.of(context)!.politics, false,"politics"),
-      new CategoryParameters(Color(0xFFED1E79), 'assets/health.png', AppLocalizations.of(context)!.health, true,"health"),
-      new CategoryParameters(Color(0xFFCF7E48), 'assets/bussines.png', AppLocalizations.of(context)!.business, false,"bussines"),
-      new CategoryParameters(Color(0xFF4882CF), 'assets/environment.png', AppLocalizations.of(context)!.environment, true,"environment"),
-      new CategoryParameters(Color(0xFFF2D352), 'assets/science.png', AppLocalizations.of(context)!.science, false,"science"),
+      new CategoryParameters(Color(0xFFC91C22), 'assets/sports.png', AppLocalizations.of(context)!.sports, true,"sports",changeCurruntCategoty),
+      new CategoryParameters(Color(0xFF003E90), 'assets/Politics.png', AppLocalizations.of(context)!.politics, false,"politics",changeCurruntCategoty),
+      new CategoryParameters(Color(0xFFED1E79), 'assets/health.png', AppLocalizations.of(context)!.health, true,"health",changeCurruntCategoty),
+      new CategoryParameters(Color(0xFFCF7E48), 'assets/bussines.png', AppLocalizations.of(context)!.business, false,"bussines",changeCurruntCategoty),
+      new CategoryParameters(Color(0xFF4882CF), 'assets/environment.png', AppLocalizations.of(context)!.environment, true,"environment",changeCurruntCategoty),
+      new CategoryParameters(Color(0xFFF2D352), 'assets/science.png', AppLocalizations.of(context)!.science, false,"science",changeCurruntCategoty),
     ];
 
     return  Scaffold(
-        appBar: AppBar(
-          title: new Text(AppLocalizations.of(context)!.title, style: TextStyle(color: Colors.white, fontSize: 22),),
-          centerTitle: true,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28),
-              )
-          ),
-        ),
-        drawer: Drawer(
-          child: AppSideMenu(),
-        ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage("assets/bckImg.png"), fit: BoxFit.fill,),
@@ -74,8 +64,10 @@ class CategoryParameters
   Color backgroundColor;
   String imageUrl, categoryTitle,categoryEnglishTitle;
   bool left;
+  final Function(String,String) changeCurruntCategoty;
 
-  CategoryParameters(this.backgroundColor, this.imageUrl, this.categoryTitle, this.left,this.categoryEnglishTitle);
+
+  CategoryParameters(this.backgroundColor, this.imageUrl, this.categoryTitle, this.left,this.categoryEnglishTitle,this.changeCurruntCategoty);
 }
 
 class CategoryItem extends StatelessWidget
@@ -94,7 +86,8 @@ class CategoryItem extends StatelessWidget
       // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: (){
-          Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: [myParams.categoryEnglishTitle, myParams.categoryTitle]);
+          myParams.changeCurruntCategoty(myParams.categoryTitle,myParams.categoryEnglishTitle);
+          //Navigator.pushNamed(context, HomeScreen.Route_Name,arguments: [myParams.categoryEnglishTitle, myParams.categoryTitle]);
         },
         child: Center(
           child: Column(

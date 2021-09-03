@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:news_flutter/AppConfigProvider.dart';
-import 'package:news_flutter/ui/CategoriesPage.dart';
 import 'package:news_flutter/ui/HomeScreen.dart';
 import 'package:news_flutter/ui/SideMenuSettings.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
           routes: {
             HomeScreen.Route_Name : (context) => HomeScreen(provider.curruntLocale),
             SideMenuSettings.Route_name : (context) => SideMenuSettings(),
-            CategoriesPage.Route_Name : (context) => CategoriesPage(),
           },
           supportedLocales: AppLocalizations.supportedLocales,
           initialRoute: HomeScreen.Route_Name,

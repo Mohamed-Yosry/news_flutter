@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppSideMenu extends StatelessWidget {
+  final Function(int) changeCurruntBody;
+  AppSideMenu(this.changeCurruntBody);
 
   @override
   Widget build(BuildContext context) {
     List<SideMenuItemData> sideMenuList =[
-      SideMenuItemData(Icons.view_list_rounded, AppLocalizations.of(context)!.categories,"Categories"),
-      SideMenuItemData(Icons.settings, AppLocalizations.of(context)!.settings,"Settings"),
+      SideMenuItemData(Icons.view_list_rounded, AppLocalizations.of(context)!.categories,"Categories",changeCurruntBody,1),
+      SideMenuItemData(Icons.settings, AppLocalizations.of(context)!.settings,"Settings",changeCurruntBody,0),
 
     ];
     return Container(
@@ -43,7 +45,9 @@ class SideMenuItemData
   IconData iconData;
   String title;
   String navigatorTitle;
-  SideMenuItemData(this.iconData, this.title,this.navigatorTitle);
+  final Function(int) changeCurruntBody;
+  int indexInBodyList;
+  SideMenuItemData(this.iconData, this.title,this.navigatorTitle,this.changeCurruntBody,this.indexInBodyList);
 }
 
 class SideMenuItem extends StatelessWidget{
@@ -55,7 +59,8 @@ class SideMenuItem extends StatelessWidget{
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, myData.navigatorTitle);
+        myData.changeCurruntBody(myData.indexInBodyList);
+        //Navigator.pushNamed(context, myData.navigatorTitle);
 
       },
       child: Row(

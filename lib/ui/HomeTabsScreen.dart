@@ -23,9 +23,7 @@ class _HomeTabsState extends State<HomeTabs> {
 
   Model model;
 
-  _HomeTabsState(this.model){
-    print("curruntCategories constuctor /////////////////////////////  ${model.curruntCategories} ");
-  }
+  _HomeTabsState(this.model);
 
   int selectedTab = 0;
 
@@ -52,8 +50,10 @@ class _HomeTabsState extends State<HomeTabs> {
               ),
               Expanded(
                 child:TabBarView(
+                  
                   children:
                     widget.model.sources.map((e) => NewsFrag(e,model.curruntCategories,model.curruntLocale)).toList(),
+
                     //widget.sources.map((e) => NewsFrag(e)).toList()
                 ),
               )

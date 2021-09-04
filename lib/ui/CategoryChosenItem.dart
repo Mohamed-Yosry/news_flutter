@@ -8,14 +8,13 @@ import 'HomeTabsScreen.dart';
 
 // ignore: must_be_immutable
 class CategoryChosenItem extends StatelessWidget {
-  String curruntCategory,search;
+  String curruntCategory;
   late Future<SourceResponse> newFuture;
-  CategoryChosenItem(this.newFuture,this.curruntCategory,this.search);
+  CategoryChosenItem(this.newFuture,this.curruntCategory);
 
 
   @override
   Widget build(BuildContext context) {
-    print("curruntCategory /////////////////////////////  $curruntCategory ");
 
     final provider = Provider.of<AppConfigProvider>(context);
     return Container(
@@ -27,8 +26,7 @@ class CategoryChosenItem extends StatelessWidget {
         builder: (BuildContext context, snapshot) {
           if(snapshot.hasData)
           {
-            print("sssssssssssssssssssssssssssssssssss /////////////////////////////  $curruntCategory ");
-            return HomeTabs(snapshot.data!.sources,curruntCategory,provider.curruntLocale,search);
+            return HomeTabs(Model(snapshot.data!.sources,curruntCategory,provider.curruntLocale),key: UniqueKey());
           }else if(snapshot.hasError){
             print(snapshot.error);
             return Text("error");

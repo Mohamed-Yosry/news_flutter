@@ -78,6 +78,7 @@ class _AppBarWithSearchState extends State<AppBarWithSearch> {
                   color: Colors.white,
                 ),
                 child: TextField(
+                    autofocus: true,
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     controller: searchController,
                     decoration: InputDecoration(
@@ -95,10 +96,17 @@ class _AppBarWithSearchState extends State<AppBarWithSearch> {
                         color: Theme.of(context).primaryColor,
                         icon: Icon(Icons.search),
                         onPressed: (){
+                          changeCurruntCategoty(windowTitle,searchController.text);
                           setState(() {
                             windowTitle = AppLocalizations.of(context)!.searchAppBar;
+                            _isTextFieldActive=false;
                           });
-                          changeCurruntCategoty(windowTitle,searchController.text);
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+
+                          if (!currentFocus.hasPrimaryFocus) {
+                            currentFocus.unfocus();
+                          }
+
                         },
                       ),
                       contentPadding: EdgeInsets.only(top: 6),

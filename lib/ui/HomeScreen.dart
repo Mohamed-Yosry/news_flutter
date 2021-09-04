@@ -27,12 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<SourceResponse> newFuture;
   String windowTitle = "general";
   var searchController = TextEditingController();
-  String category = 'general',search="";
+  String category = 'general';
 
   @override
   void initState() {
     super.initState();
-    print("initstate   $category");
     newFuture = getNewsSources(category, curruntLocale);
   }
 
@@ -40,12 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       windowTitle=categoryTitle;
       category=categoryEnglishTitle;
-      search=categoryEnglishTitle;
       curruntIndex=2;
       appBarIndex=0;
-      print("$windowTitle   /////////////////////////////  $category   ////\n$curruntIndex////////// $appBarIndex");
     });
   }
+
+
 
   changeCurruntBody(int newIndex) {
     setState(() {
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List bodyList = [
       SideMenuSettings(),
       CategoriesPage(changeCategoriItem),
-      CategoryChosenItem(newFuture, category,search),
+      CategoryChosenItem(newFuture, category),
     ];
 
     List appBarsList = [
@@ -74,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
       AppBarWithoutSearch(),
     ];
 
-    print("under list   $windowTitle   /////////////////////////////  $category   ////\n$curruntIndex////////// $appBarIndex");
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
